@@ -10,6 +10,10 @@ const refs = {
   closeButton: document.querySelector('button[data-action = "close-lightbox"]'),
 };
 
+refs.galleryUl.addEventListener('click', onGalleryClick);
+refs.closeButton.addEventListener('click', closeModalWindow);
+refs.overlay.addEventListener('click', closeModalWindow);
+
 const galleryList = gallery.map(image => {
   const itemRef = document.createElement('li');
   itemRef.classList.add('gallery__item');
@@ -32,8 +36,6 @@ const galleryList = gallery.map(image => {
 });
 refs.galleryUl.append(...galleryList);
 
-refs.galleryUl.addEventListener('click', onGalleryClick);
-
 function onGalleryClick(event) {
   event.preventDefault();
   window.addEventListener('keydown', onEscapeClick);
@@ -47,9 +49,6 @@ function onGalleryClick(event) {
   const largeImageUrl = event.target.dataset.source;
   refs.largeImage.src = largeImageUrl;
 }
-
-refs.closeButton.addEventListener('click', closeModalWindow);
-refs.overlay.addEventListener('click', closeModalWindow);
 
 function closeModalWindow() {
   window.removeEventListener('keydown', onEscapeClick);
